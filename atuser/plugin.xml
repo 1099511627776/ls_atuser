@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>
+        <lang name="default">@User</lang>
+        <lang name="russian">@User</lang>
+    </name>
+    <author>
+        <lang name="default">1099511627776</lang>
+        <lang name="russian">1099511627776</lang>
+    </author>
+    <homepage>http://habrahabr.ru/users/1099511627776/</homepage>
+    <version>0.1</version>
+    <requires>
+        <livestreet>1.0.1</livestreet>
+        <plugins>
+        </plugins>
+    </requires>
+    <description>
+        <lang name="default">converts @username to link if user exists in LS</lang>
+        <lang name="russian">конвертирует @username в ссылку если юзер зарегистрирован в LS</lang>
+    </description>
+</plugin>
