@@ -6,7 +6,7 @@ class PluginAtuser_HookAtuser extends Hook {
      * Регистрация событий на хуки
 	*/
 
-	protected function makeCorrection($sText){
+	protected function makeCorrection($sText,$template,$aAssign=array()){
 		$match = array();
 		preg_match_all('/@\S+/u',$sText,$match);
 		$repls = array();
@@ -15,6 +15,9 @@ class PluginAtuser_HookAtuser extends Hook {
 				$login = substr($val[0],1);
 				if($oUser = $this->User_GetUserByLogin($login)) {
 					$repls[] = array('repl'=>$val[0],'ref'=>$oUser->getUserWebPath(),'login'=>$oUser->getLogin());
+					$params=array('oUser'=>$oUser);
+					$params = array_merge($params,$aAssign);
+					$this->Notify_Send($oUser,$template,'Mention Notify',$params,'atuser');
 				}
 			}
 		}
@@ -31,14 +34,17 @@ class PluginAtuser_HookAtuser extends Hook {
 	
 	public function correctComment($params){
 		$oComment = $params['oCommentNew'];
-		$sRes = $this->makeCorrection($oComment->getText());
+		$sRes = $this->makeCorrection($oComment->getText(),
+			'notify.comment_mention.tpl',
+			array('oComment'=>$oComment)
+		);
 		$oComment->setText($sRes);
 		$oComment->setTextHash(md5($sRes));
 	}
 
 	public function correntTopic($params){
 		$oTopic = $params['oTopic'];
-		$sRes = $this->makeCorrection($oTopic->getText());
+		$sRes = $this->makeCorrection($oTopic->getText(),'');
 		$oTopic->setText($sRes);
 		$oTopic->setTextHash(md5($sRes));
 	}
