@@ -9,10 +9,6 @@ if (!class_exists('Plugin')) {
 
 class PluginAtuser extends Plugin {
 
-	protected $aInherits=array(
-		'module'=>array('ModuleText'),
-	);
-
     // Активация плагина
     public function Activate() {
         return true;
