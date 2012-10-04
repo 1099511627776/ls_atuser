@@ -42,7 +42,7 @@ class PluginAtuser_HookAtuser extends Hook {
 		$oComment->setTextHash(md5($sRes));
 	}
 
-	public function correntTopic($params){
+	public function correctTopic($params){
 		$oTopic = $params['oTopic'];
 		$sRes = $this->makeCorrection($oTopic->getText(),'');
 		$oTopic->setText($sRes);
