@@ -8,16 +8,20 @@ class PluginAtuser_HookAtuser extends Hook {
 
 	protected function makeCorrection($sText,$template,$aAssign=array()){
 		$match = array();
-		preg_match_all('/@\S+/u',$sText,$match);
+		preg_match_all('/@\w+/u',$sText,$match);
 		$repls = array();
-		foreach($match as $val){               	
-			if(count($val) != 0) {
-				$login = substr($val[0],1);
-				if($oUser = $this->User_GetUserByLogin($login)) {
-					$repls[] = array('repl'=>$val[0],'ref'=>$oUser->getUserWebPath(),'login'=>$oUser->getLogin());
-					$params=array('oUser'=>$oUser);
-					$params = array_merge($params,$aAssign);
-					$this->Notify_Send($oUser,$template,'Mention Notify',$params,'atuser');
+		foreach($match as $vals){
+			if(count($vals) != 0) {
+				foreach ($vals as $val){
+					$login = substr(trim($val),1);
+					if($oUser = $this->User_GetUserByLogin($login)) {
+						$repls[] = array('repl'=>$val,'ref'=>$oUser->getUserWebPath(),'login'=>$oUser->getLogin());
+						if($template != ''){
+							$params=array('oUser'=>$oUser);
+							$params = array_merge($params,$aAssign);
+							$this->Notify_Send($oUser,$template,'Mention Notify',$params,'atuser');
+						}
+					}
 				}
 			}
 		}
@@ -30,6 +34,7 @@ class PluginAtuser_HookAtuser extends Hook {
     public function RegisterHook() {
         $this->AddHook('comment_add_before', 'correctComment',__CLASS__);
         $this->AddHook('topic_add_before', 'correctTopic',__CLASS__);
+        $this->AddHook('topic_edit_before', 'correctTopic',__CLASS__);
     }
 	
 	public function correctComment($params){
