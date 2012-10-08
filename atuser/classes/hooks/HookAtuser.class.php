@@ -39,9 +39,15 @@ class PluginAtuser_HookAtuser extends Hook {
 	
 	public function correctComment($params){
 		$oComment = $params['oCommentNew'];
+		$oSender = $this->User_GetUserById($oComment->getUserId());
+		$oTopic = $this->Topic_GetTopicById($oComment->getTargetId());
+		/*print_r($oSender);
+		print_r($oTopic);
+		print_r($oComment);*/
+
 		$sRes = $this->makeCorrection($oComment->getText(),
 			'notify.comment_mention.tpl',
-			array('oComment'=>$oComment)
+			array('oComment'=>$oComment,'oSender'=>$oSender,'oTopic'=>$oTopic)
 		);
 		$oComment->setText($sRes);
 		$oComment->setTextHash(md5($sRes));
