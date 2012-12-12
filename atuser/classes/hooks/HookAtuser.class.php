@@ -19,7 +19,8 @@ class PluginAtuser_HookAtuser extends Hook {
 						if($template != ''){
 							$params=array('oUser'=>$oUser);
 							$params = array_merge($params,$aAssign);
-							$this->Notify_Send($oUser,$template,'Mention Notify',$params,'atuser');
+							$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
+							$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');
 						}
 					}
 				}
