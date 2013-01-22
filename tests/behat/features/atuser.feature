@@ -13,5 +13,9 @@ Feature: Greeting plugin standart features BDD
 			Then I fill in "topic_tags" with "test topic"
 			Then I press element by css "#submit_topic_publish"
 			Then I wait "2000"
-			Then print last response
 			Then the response should contain "<a class=\"ls-user\" href=\"http://livestreet.test/profile/admin/\">admin</a>"
+			Then I press element by css ".reply-header .link-dotted"
+			Then I fill in "comment_text" with "This is a comment to @user-golfer"
+			Then I press element by css "#comment-button-submit"
+			Then I wait "2000"
+			Then the response should contain "<a class=\"ls-user\" href=\"http://livestreet.test/profile/user-golfer/\">user-golfer</a>"
