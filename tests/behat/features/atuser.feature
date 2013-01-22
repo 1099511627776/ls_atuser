@@ -18,4 +18,5 @@ Feature: Greeting plugin standart features BDD
 			Then I fill in "comment_text" with "This is a comment to @user-golfer"
 			Then I press element by css "#comment-button-submit"
 			Then I wait "2000"
+			Then print last response
 			Then the response should contain "<a class=\"ls-user\" href=\"http://livestreet.test/profile/user-golfer/\">user-golfer</a>"

@@ -12,8 +12,6 @@ before_script:
   - cp -a /tmp/ls/* ./
   - cp /tmp/ls/.htaccess ./
   - mkdir -p plugins/atuser && cp -a /tmp/plugins/atuser/* plugins/atuser
-  - pwd
-  - ls ./
   - echo "atuser" > ./plugins/plugins.dat
   - cat ./plugins/plugins.dat
 
