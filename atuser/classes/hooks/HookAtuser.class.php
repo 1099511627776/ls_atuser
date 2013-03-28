@@ -33,9 +33,9 @@ class PluginAtuser_HookAtuser extends Hook {
 		return $sRes;
 	}
     public function RegisterHook() {
-        $this->AddHook('comment_add_before', 'correctComment',__CLASS__);
-        $this->AddHook('topic_add_before', 'correctTopic',__CLASS__);
-        $this->AddHook('topic_edit_before', 'correctTopic',__CLASS__);
+        //$this->AddHook('comment_add_before', 'correctComment',__CLASS__);
+        /*$this->AddHook('topic_add_before', 'correctTopic',__CLASS__);
+        $this->AddHook('topic_edit_before', 'correctTopic',__CLASS__);*/
     }
 	
 	public function correctComment($params){
