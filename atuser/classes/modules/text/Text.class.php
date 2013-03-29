@@ -2,7 +2,7 @@
 
 class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
 {
-	protected function makeCorrection($sText,$template,$aAssign=array()){
+	protected function makeCorrection($sText){
 		$match = array();
 		preg_match_all('/@\w+/u',$sText,$match);
 		$repls = array();
@@ -12,12 +12,6 @@ class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
 					$login = substr(trim($val),1);
 					if($oUser = $this->User_GetUserByLogin($login)) {
 						$repls[] = array('repl'=>$val,'ref'=>$oUser->getUserWebPath(),'login'=>$oUser->getLogin());
-						if($template != ''){
-							$params=array('oUser'=>$oUser);
-							$params = array_merge($params,$aAssign);
-							$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
-							$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');
-						}
 					}
 				}
 			}
@@ -31,7 +25,7 @@ class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
 	
 	public function Parser($sText) {
 		$sResult = parent::Parser($sText);
-		$sResult = $this->makeCorrection($sResult,'');
+		$sResult = $this->makeCorrection($sResult);
 		return $sResult;
 	}
 }

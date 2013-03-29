@@ -16,12 +16,6 @@ class PluginAtuser_HookAtuser extends Hook {
 					$login = substr(trim($val),1);
 					if($oUser = $this->User_GetUserByLogin($login)) {
 						$repls[] = array('repl'=>$val,'ref'=>$oUser->getUserWebPath(),'login'=>$oUser->getLogin());
-						/*if($template != ''){
-							$params=array('oUser'=>$oUser);
-							$params = array_merge($params,$aAssign);
-							$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
-							$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');
-						}*/
 					}
 				}
 			}
@@ -32,18 +26,14 @@ class PluginAtuser_HookAtuser extends Hook {
 		}
 		preg_match_all("/<a.*?class=[\"']ls-user[\"']\s*?>(.*?)<\/a>/u",$sText,$match);
 		$matches = array_unique($match[1]);
-		foreach($matches as $vals){				
-			if(count($vals) != 0) {
-				foreach ($vals as $val){					
-					$login = substr(trim($val),1);
-					if($oUser = $this->User_GetUserByLogin($login)) {
-						if($template != ''){
-						$params=array('oUser'=>$oUser);
-							$params = array_merge($params,$aAssign);
-							$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
-							$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');
-						}
-					}
+		foreach($matches as $val){				
+			$login = trim($val);
+			if($oUser = $this->User_GetUserByLogin($login)) {
+				if($template != ''){
+					$params=array('oUser'=>$oUser);
+					$params = array_merge($params,$aAssign);
+					$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
+					$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');							
 				}
 			}
 		}
@@ -51,8 +41,7 @@ class PluginAtuser_HookAtuser extends Hook {
 	}
     public function RegisterHook() {
         $this->AddHook('comment_add_before', 'correctComment',__CLASS__);
-        /*$this->AddHook('topic_add_before', 'correctTopic',__CLASS__);
-        $this->AddHook('topic_edit_before', 'correctTopic',__CLASS__);*/
+        $this->AddHook('comment_item_add_after', 'correctComment',__CLASS__);        
     }
 	
 	public function correctComment($params){
