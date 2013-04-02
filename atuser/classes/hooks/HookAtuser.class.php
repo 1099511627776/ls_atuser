@@ -26,13 +26,13 @@ class PluginAtuser_HookAtuser extends Hook {
 		}
 		preg_match_all("/<a.*?class=[\"']ls-user[\"']\s*?>(.*?)<\/a>/u",$sText,$match);
 		$matches = array_unique($match[1]);
+		$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
 		foreach($matches as $val){				
 			$login = trim($val);
 			if($oUser = $this->User_GetUserByLogin($login)) {
 				if($template != ''){
 					$params=array('oUser'=>$oUser);
 					$params = array_merge($params,$aAssign);
-					$sNotifyTitle = $this->Lang_Get('plugin.atuser.notify_title');
 					$this->Notify_Send($oUser,$template,$sNotifyTitle,$params,'atuser');							
 				}
 			}
