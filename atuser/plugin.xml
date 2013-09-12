@@ -9,7 +9,7 @@
         <lang name="russian">1099511627776</lang>
     </author>
     <homepage>http://habrahabr.ru/users/1099511627776/</homepage>
-    <version>0.1</version>
+    <version>0.2</version>
     <requires>
         <livestreet>1.0.1</livestreet>
         <plugins>
