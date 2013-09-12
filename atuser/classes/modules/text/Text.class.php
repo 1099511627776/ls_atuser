@@ -4,11 +4,11 @@ class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
 {
     protected function processHashTag($match){
         $word = $match[1];
-        return '<a class="inline-tag" href="'.Router::GetPath('tag').$word.'">'.$word.'</a>';
+        return '<a class="inline-tag" href="'.Router::GetPath('tag').trim($word).'/">'.trim($word).'</a>';
     }
 
     protected function makeHashTag($sText){
-        return preg_replace_callback("/#(\S+[^\s])/misu",array($this,"processHashTag"),$sText);
+        return preg_replace_callback("/#(\p{L}+)/misu",array($this,"processHashTag"),$sText);
     }
 
     protected function makeAtUser($sText){
