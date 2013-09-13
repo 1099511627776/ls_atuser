@@ -3,7 +3,7 @@
 class PluginAtuser_HookAtuser extends Hook {
 
     /*
-     * Регистрация событий на хуки
+     * Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРѕР±С‹С‚РёР№ РЅР° С…СѓРєРё
     */
     protected function processHashTag($match){
         $word = $match[1];
