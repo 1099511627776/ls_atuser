@@ -8,7 +8,7 @@ class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
     }
 
     protected function makeHashTag($sText){
-        return preg_replace_callback("/#(\p{L}+)/misu",array($this,"processHashTag"),$sText);
+        return preg_replace_callback("/#([\p{L}\p{N}_-]+)/misu",array($this,"processHashTag"),$sText);
     }
 
     protected function makeAtUser($sText){

@@ -11,7 +11,7 @@ class PluginAtuser_HookAtuser extends Hook {
     }
 
     protected function makeHashTag($sText){
-        return preg_replace_callback("/#(\p{L}+)/misu",array($this,"processHashTag"),$sText);
+        return preg_replace_callback("/#([\p{L}\p{N}_-]+)/misu",array($this,"processHashTag"),$sText);
     }
 
     protected function makeAtUser($sText,$template,$aAssign=array()){
