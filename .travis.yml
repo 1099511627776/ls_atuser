@@ -8,7 +8,8 @@ before_script:
   - mkdir -p /tmp/plugins/atuser/tests
   - mv atuser/* /tmp/plugins/atuser
   - mv tests/* /tmp/plugins/atuser/tests
-  - mkdir /tmp/ls && git clone git://github.com/1099511627776/livestreet.git /tmp/ls
+  - mkdir /tmp/ls && git clone https://github.com/stfalcon-studio/livestreet.git /tmp/ls
+  #- cd /tmp/ls && git checkout "1.0.1" && cd /home/travis/build/1099511627776/ls_atuser
   - cp -a /tmp/ls/* ./
   - cp /tmp/ls/.htaccess ./
   - mkdir -p plugins/atuser && cp -a /tmp/plugins/atuser/* plugins/atuser
@@ -22,6 +23,7 @@ before_script:
   - chmod -R 0777 ./templates/compiled/
 
   # install required PHP stuff
+  - sudo apt-get update
   - sudo apt-get install php5 php5-cli php5-mysql php5-mcrypt php5-xsl php5-xdebug php-apc php5-gd php5-curl php5-intl php5-xmlrpc
 
   # launch apache, MySQL and PHPUnit Selenium installers
