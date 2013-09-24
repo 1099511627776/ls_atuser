@@ -7,8 +7,19 @@ class PluginAtuser_ModuleText extends PluginAtuser_Inherit_ModuleText
         return '<a class="inline-tag" href="'.Router::GetPath('tag').trim($word).'/">'.trim($word).'</a>';
     }
 
+    protected function markAHash($match){
+        return "<a".$match[1]."\"".$match[2]."&hash;".$match[3]."\"".$match[4].">";
+    }
+
     protected function makeHashTag($sText){
-        return preg_replace_callback("/#([\p{L}\p{N}_-]+)/misu",array($this,"processHashTag"),$sText);
+        //mark special hashtags
+        $sTmp = preg_replace_callback("/<a(.*href=)['\"](.*)#(.*)['\"](.*[^>])>/misuU",array($this,'markAHash'),$sText);
+        ////////////////////////
+        $sTmp = preg_replace_callback("/#([\p{L}\p{N}_-]+)/misu",array($this,"processHashTag"),$sTmp);
+        //demark
+        $sTmp = str_replace("&hash;","#",$sTmp);
+        ////////
+        return $sTmp;
     }
 
     protected function makeAtUser($sText){

@@ -5,14 +5,6 @@ class PluginAtuser_HookAtuser extends Hook {
     /*
      * Регистрация событий на хуки
     */
-    protected function processHashTag($match){
-        $word = $match[1];
-        return '<a class="inline-tag" href="'.Router::GetPath('tag').trim($word).'/">'.trim($word).'</a>';
-    }
-
-    protected function makeHashTag($sText){
-        return preg_replace_callback("/#([\p{L}\p{N}_-]+)/misu",array($this,"processHashTag"),$sText);
-    }
 
     protected function makeAtUser($sText,$template,$aAssign=array()){
         $match = array();
@@ -60,7 +52,7 @@ class PluginAtuser_HookAtuser extends Hook {
             'notify.comment_mention.tpl',
             array('oComment'=>$oComment,'oSender'=>$oSender,'oTopic'=>$oTopic)
         );
-        $oComment->setText($sRes);
+        $oComment->setText($this->Text_Parser($sRes));
         $oComment->setTextHash(md5($sRes));
     }
 
