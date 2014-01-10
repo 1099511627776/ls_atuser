@@ -1,3 +1,4 @@
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/1099511627776/ls_atuser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![Build Status](https://travis-ci.org/1099511627776/ls_atuser.png?branch=master)](master)
 ls_atuser
 =========
